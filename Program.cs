@@ -17,4 +17,12 @@ if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPLICATIONINSIGHT
         .UseAzureMonitorExporter();
 }
 
+string connectionString = Environment.GetEnvironmentVariable("CosmosDbConnectionString") ?? throw new InvalidOperationException("CosmosDB connection string is not set in the environment variables.");
+
+builder.Services.AddSingleton<CosmosClient>(_ => new CosmosClient(connectionString, new CosmosClientOptions() { ConnectionMode = ConnectionMode.Gateway }));
+builder.Services.AddSingleton<IPersonRepository, PersonRepository>();
+builder.Services.AddSingleton<IPersonService, PersonService>();
+
+
+
 builder.Build().Run();
