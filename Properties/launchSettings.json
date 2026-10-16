@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "_4_CosmosDB": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7233",
+      "launchBrowser": false
+    }
+  }
+}
