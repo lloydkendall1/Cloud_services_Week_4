@@ -1,0 +1,46 @@
+@baseUrl = http://localhost:7071/api
+
+### Get all persons
+GET {{baseUrl}}/persons
+
+### Add a person
+POST {{baseUrl}}/persons
+Content-Type: application/json
+
+{
+  "firstName": "joran",
+  "lastName": "planckaert",
+  "eMail": "joran.qalie@example.com",
+  "age": 22,
+  "locations": [
+    { "city": "Kortrijk", "street": "Marksesteenweg 58" }
+  ]
+}
+
+### Add a person - invalid (missing lastName, expect 400)
+POST {{baseUrl}}/persons
+Content-Type: application/json
+
+{
+  "firstName": "Jane"
+}
+
+### Get one person by id (replace the id with one from GET /persons)
+GET {{baseUrl}}/persons/e189e547-b4af-46a4-8f73-68760955a1d1
+
+### Update a person (full replace)
+PUT {{baseUrl}}/persons/e189e547-b4af-46a4-8f73-68760955a1d1
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "eMail": "jane.smith@example.com",
+  "age": 31,
+  "locations": [
+    { "city": "Ghent", "street": "Korenmarkt 1" }
+  ]
+}
+
+### Delete a person (expect 204, or 404 if it doesn't exist)
+DELETE {{baseUrl}}/persons/REPLACE-WITH-ID
